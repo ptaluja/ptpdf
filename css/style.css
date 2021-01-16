@@ -1,0 +1,80 @@
+<script>
+
+var imageFile=document.getElementById("imageFile");
+var button1=document.getElementById("button1");
+var button=document.getElementById("button");
+var filelist=[];
+var doc=new jsPDF("p","mm");
+var image=new Image();
+var reader=new FileReader();
+
+
+
+//UPLOAD FiLES
+imageFile.addEventListener("change",addImage,false);
+function addImage(){
+	for(var i=0;i<imageFile.files.length;i++){
+		var ans=imageFile.files[i]["name"]+"<br>";
+      filelist[i]=ans;
+}
+document.getElementById("demo").innerHTML=filelist.join("");
+}
+
+
+
+//UPLOAD BUTTON
+button1.addEventListener("click",handleImage,false);
+
+
+function handleImage(e){
+	//condition 
+if(imageFile.files[0]==null){
+alert("please enter the image first");
+}
+else{
+//looping
+for(var i=0;i<imageFile.files.length;i++){
+//reader event
+//onload event for reader
+reader.onload=function(event){
+//image module
+//image onload
+
+image.onload=function(){
+//adding image
+alert(i);
+var width = (doc.internal.pageSize.width)-30;    
+var height = doc.internal.pageSize.height;
+var h1=110;
+doc.addImage(image,"JPG",14,40,width,(height-h1));
+doc.addPage();
+
+//download
+}
+image.src=event.target.result;
+
+} 
+
+reader.readAsDataURL(e.target.files[i]);
+
+}
+}
+}
+
+
+//DOWNLOAD PDF
+button.onclick=hello;
+function hello(){
+if(imageFile.files[0]==null){
+	alert("please add an image and then upload it"); 
+}
+else{
+doc.save("ptpdfconverter");
+location.reload();
+}
+}
+
+</script>
+
+
+

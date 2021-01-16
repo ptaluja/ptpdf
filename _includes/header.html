@@ -1,0 +1,114 @@
+<body style="background-image: url('img/elec.webp');">
+   <div class="container-fluid container-table">
+      <div class="row h-50 d-block" style="height:28vh;background-image: url('img/navbar.jpg');  border-bottom: 10px solid black;">
+         <div class="col col-xl-12 col-sm-12 col-md-12" style="height:20vh">
+            <h1 style="font-size:8vw;color:grey;-webkit-text-stroke: 5px black;font-family: fantasy; " class="text-center banner">Welcome to PT Pdf Converter</h1>
+
+            <br>
+         </div>
+         <br>
+      </div>
+      <header>
+         <br><br>
+         <div class="row-box">
+            <div class="col col-xl-4 col-sm-7 col-md-6 col-md-offset-3 col-sm-offset-2" style="background:black;padding:20px;border-radius:70px;">
+               <div class="header-content-inner text-center">
+                  <br>
+                  <u>
+                     <i>
+                        <h1 style="font-size:20px;color:green"><span style="color:red">NOTE: </span>PLEASE UPLOAD ALL THE IMAGES AT A TIME</h1>
+                     </i>
+                  </u>
+                  <br>
+                  <b>
+                     <p id="demo" style="color:white;font-size:20px"></p>
+                  </b>
+                  <br>
+                  <input class="form-control form-control-md align-center" id="imageFile" type="file" multiple/><br>
+                  <p></p>
+                  <a href="#about" class="btn btn-primary btn-xl page-scroll" id="button1" style="text-indent:5px;padding:15px 20px">Upload Image</a>
+                  <a href="#about" class="btn btn-primary btn-xl page-scroll" id="button" style="text-indent:5px;padding:15px 20px;margin-left:30px">Download pdf</a>       
+               </div>
+            </div>
+         </div>
+      </header>
+   </div>
+</body>
+
+<script>
+
+var imageFile=document.getElementById("imageFile");
+var button1=document.getElementById("button1");
+var button=document.getElementById("button");
+var file=[];
+var doc=new jsPDF("p","mm");
+
+
+
+
+//UPLOAD FiLES
+imageFile.addEventListener("change",addImage,false);
+function addImage(){
+	for(var i=0;i<imageFile.files.length;i++){
+		var ans=imageFile.files[i]["name"]+"<br>";
+      file[i]=ans;
+}
+console.log(imageFile.files);
+
+document.getElementById("demo").innerHTML=file.join("");
+}
+
+
+
+//UPLOAD BUTTON
+button1.addEventListener("click",handleImage,false);
+
+
+function handleImage(e){
+	//condition 
+if(imageFile.files[0]==null){
+alert("please enter the image first");
+}
+else{
+//looping
+for(var j=0;j<imageFile.files.length;j++){
+//reader event
+//onload event for reader
+var reader=new FileReader();
+reader.onload=function(event){
+//image module
+//image onload
+var image=new Image();
+image.onload=function(){
+//adding image
+var width = (doc.internal.pageSize.width)-30;    
+var height = doc.internal.pageSize.height;
+var h1=110;
+doc.addImage(image,"PNG",14,40,width,(height-h1));
+doc.addPage();
+//download
+}
+image.src=event.target.result;
+} 
+reader.readAsDataURL(imageFile.files[j]);
+}
+}
+}
+
+
+//DOWNLOAD PDF
+button.onclick=hello;
+function hello(){
+if(imageFile.files[0]==null){
+	alert("please add an image and then upload it"); 
+}
+else{
+doc.save("ptpdfconverter");
+location.reload();
+}
+}
+
+</script>
+
+
+
