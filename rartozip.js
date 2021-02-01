@@ -47,7 +47,6 @@ function zip() {
     }).then(function(content) {
         var a = URL.createObjectURL(content);
         saveAs(a, "download");
-        location.reload();
 
     });
 }
