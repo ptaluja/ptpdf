@@ -3,8 +3,7 @@
 // https://github.com/workhorsy/uncompress.js
 
 let fileInput = document.getElementById('fileInput');
-let entryList = document.getElementById('entryList');
-let errorList = document.getElementById('errorList');
+
 var arr1 = [];
 var arr2 = [];
 
@@ -20,6 +19,7 @@ function onArchiveLoaded(archive) {
 
         entry.readData(function(data, err) {
             if (err) {
+                is_error = true;
                 alert(err);
                 return;
             }
@@ -55,7 +55,6 @@ loadArchiveFormats(['rar'], function() {
         // Just return if there is no file selected
         if (fileInput.files.length === 0) {
             alert("file not selected");
-            return;
         }
 
         // Get the selected file
@@ -67,10 +66,9 @@ loadArchiveFormats(['rar'], function() {
         archiveOpenFile(file, password, function(archive, err) {
             if (archive) {
                 console.info('Uncompressing ' + archive.archive_type + ' ...');
-                entryList.innerHTML = '';
                 onArchiveLoaded(archive);
             } else {
-                alert("error");
+                alert(err);
             }
         });
     };
