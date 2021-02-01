@@ -20,9 +20,7 @@ function onArchiveLoaded(archive) {
 
         entry.readData(function(data, err) {
             if (err) {
-                is_error = true;
-                errorList.innerHTML = err;
-                entryList.innerHTML = '';
+                alert(err);
                 return;
             }
 
@@ -56,7 +54,7 @@ loadArchiveFormats(['rar'], function() {
     fileInput.onchange = function() {
         // Just return if there is no file selected
         if (fileInput.files.length === 0) {
-            entryList.innerHTML = 'No file selected';
+            alert("file not selected");
             return;
         }
 
@@ -72,7 +70,7 @@ loadArchiveFormats(['rar'], function() {
                 entryList.innerHTML = '';
                 onArchiveLoaded(archive);
             } else {
-                entryList.innerHTML = '<span style="color: red">' + err + '</span>';
+                alert("error");
             }
         });
     };
