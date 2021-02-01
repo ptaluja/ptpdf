@@ -45,6 +45,7 @@ function download() {
         for (let index = 0; index < ans; index++) {
             var button = document.getElementsByClassName("done");
             button[index].click();
+            alert("all files have been downloaded");
         }
     } else { alert("please enter the compressed file"); }
 
