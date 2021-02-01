@@ -1,0 +1,23 @@
+.heading {
+    background: black;
+    width: 100vw;
+    height: 25vh;
+    text-align: center;
+    font-size: 110px;
+    text-shadow: 4px 4px 10px #FF0000;
+    /* Will override color (regardless of order) */
+    background-image: url(download.jpg);
+}
+
+.main {
+    opacity: 0.7;
+    height: 300px;
+    width: 400px;
+    margin-left: 40px;
+    margin-top: 110px;
+    background: black;
+}
+
+body {
+    background-image: url(28579331-modern-digital-background-as-a-creative-art.jpg);
+}

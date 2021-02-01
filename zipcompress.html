@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js" integrity="sha512-y3o0Z5TJF1UsKjs/jS2CDkeHN538bWsftxO9nctODL5W40nyXIbs0Pgyu7//icrQY9m6475gLaVr39i/uh/nLA==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js" integrity="sha512-3WaCYjK/lQuL0dVIRt1thLXr84Z/4Yppka6u40yEJT1QulYm9pCxguF6r8V84ndP5K03koI9hV1+zo/bUbgMtA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="compress.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.js" integrity="sha512-B+gr+zLWg81qxVwvtYwKrmjvQtZKD/GGFF7jD80OfzbqFw+NsbS5faEqpCO7Q7oRw1bYi0+WLJf54j8Vm7NADw==" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-sm-12 col-md-12 col-lg-12 col-xl-12 heading" style="margin-top:-8px;margin-left:1px;height:30vh">
+                <u> ZIPCOMPRESSOR</u>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col col-sm-4 col-md-4 col-lg-4 col-xl-4" style="border:5px solid black;padding:100px;margin-left:500px;text-align:center;border-radius:50px;background: rgba(9, 12, 10, 0.7)">
+                <p style="color:green;font-size:20px"><u>PLEASE ADD ALL THE IMAGES AT A TIME</u></p>
+                <input type="file" id="input" onchange="f()" multiple style="text-align:center;color:white"><br><br>
+                <button onclick="zip()">compress</button><br><br>
+                <p>
+                    <button onclick="window.location.href='index.html'">Back to the main page</button>
+                </p>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <p id="para"></p>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.5.0/jszip.min.js" integrity="sha512-y3o0Z5TJF1UsKjs/jS2CDkeHN538bWsftxO9nctODL5W40nyXIbs0Pgyu7//icrQY9m6475gLaVr39i/uh/nLA==" crossorigin="anonymous"></script>
+<script src="js/uncompress.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip-utils/0.1.0/jszip-utils.min.js" integrity="sha512-3WaCYjK/lQuL0dVIRt1thLXr84Z/4Yppka6u40yEJT1QulYm9pCxguF6r8V84ndP5K03koI9hV1+zo/bUbgMtA==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.js" integrity="sha512-B+gr+zLWg81qxVwvtYwKrmjvQtZKD/GGFF7jD80OfzbqFw+NsbS5faEqpCO7Q7oRw1bYi0+WLJf54j8Vm7NADw==" crossorigin="anonymous"></script>
+
+<script>
+    var input = document.getElementById("input");
+    var arr = [];
+
+    function f() {
+        for (var i = 0; i < input.files.length; i += 1) {
+
+            arr.push("<p>name :" + input.files[i].name + "</p><p>size :" + input.files[i].size + "</p><hr style='border:5px solid black'>");
+            console.log(input.files);
+        }
+        document.getElementById("para").innerHTML = arr.join("");
+
+    }
+
+
+    function zip() {
+        var zip = new JSZip();
+        var files = input.files;
+        for (var j = 0; j < files.length; j += 1) {
+            var file = files[j];
+            zip.file(file.name, file);
+            console.log("added", file.name);
+        }
+
+        zip.generateAsync({
+            type: "blob"
+        }).then(function(content) {
+            var url = URL.createObjectURL(content);
+            saveAs(url, "result");
+        });
+    }
+</script>
+
+</html>

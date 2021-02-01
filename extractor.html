@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>uncompress.js</title>
+    <script src="js/uncompress.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="compress.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col col-sm-9 col-md-12 col-lg-12 col-xl-12 heading" style="margin-top:-8px;margin-left:-8px;">
+                <u> EXTRACTOR</u>
+            </div>
+        </div>
+        <div class="row"><br><br><br><br><br><br>
+            <div class="col col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding:40px;width:30%;text-align:center;border:5px solid black;border-radius:50px;margin-left:480px; background: rgba(9, 12, 10, 0.7) ">
+
+                <p>
+                    <input id="fileInput" type="file" required="required" disabled="true" style="color:white" />
+                </p>
+                <p>
+                    <button onclick="download()" id="button">download all</button>
+                </p>
+                <p>
+                    <button onclick="window.location.href='index.html'">Back to the main page</button>
+                </p>
+
+
+                <br>
+            </div>
+            <div id="errorList" style="color: red;"></div><br>
+            <div id="entryList" style="background:black;opacity: 0.7;color:white;width: 100vw;margin-left:-10px;text-align:center"></div>
+        </div>
+    </div>
+    <script src="main.js "></script>
+</body>
+
+</html>
